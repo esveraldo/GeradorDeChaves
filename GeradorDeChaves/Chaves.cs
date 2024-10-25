@@ -22,22 +22,17 @@ namespace GeradorDeChaves
         public static string ConvertToAlternatingHex(byte[] data)
         {
             StringBuilder sb = new StringBuilder(data.Length * 2);
-            //string specialChars = "!@#$%^&*()-=+[]{};:<>?";
 
             for (int i = 0; i < data.Length; i++)
             {
                 // Converte o byte para hexadecimal
                 string hex = data[i].ToString("X2");
 
-                // Alterna entre uppercase e lowercase
+                // Alterna entre uppercase e lowercase para exibição
                 if (i % 2 == 0)
                     sb.Append(hex.ToUpper()); // Par - Uppercase
                 else
-                    sb.Append(hex.ToLower());
-                //else if (i % 3 == 1)
-                //    sb.Append(hex.ToLower()); // Ímpar - Lowercase
-                //else
-                //    sb.Append(specialChars[i % specialChars.Length]); // Índices com resto 2 - Caractere especial
+                    sb.Append(hex.ToLower()); // Ímpar - Lowercase
             }
 
             return sb.ToString();

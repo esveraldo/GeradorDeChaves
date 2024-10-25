@@ -1,16 +1,32 @@
 ﻿using GeradorDeChaves;
+using System;
+using System.Security.Cryptography;
 
-byte[] aesKey16 = Chaves.GenerateAESKey(16); // 16 bytes = 128 bits, necessário para AES-128
+byte[] aesKey = Chaves.GenerateAESKey(32); // 32 bytes = 256 bits
 
-// Converte a chave para hexadecimal com intercalamento de uppercase e lowercase
-string formattedKey16 = Chaves.ConvertToAlternatingHex(aesKey16);
-Console.WriteLine("Chave AES de 32 bytes (alternando uppercase e lowercase):");
-Console.WriteLine(formattedKey16);
+// Exibe a chave em formato hexadecimal, alternando entre uppercase e lowercase
+string formattedKey = Chaves.ConvertToAlternatingHex(aesKey);
+Console.WriteLine("Chave AES de 32 bytes (alternando uppercase e lowercase para exibição):");
+Console.WriteLine(formattedKey);
 
-byte[] aesKey32 = Chaves.GenerateAESKey(32); // 32 bytes = 256 bits, necessário para AES-256
+// Exemplo de uso com AES, usando a chave como array de bytes
+using (Aes aesAlg = Aes.Create())
+{
+    aesAlg.Key = aesKey; // Usa a chave de 32 bytes diretamente
+    aesAlg.GenerateIV(); // Gera um vetor de inicialização (IV)
 
-// Exibe a chave em formato hexadecimal
-// Converte a chave para hexadecimal com intercalamento de uppercase e lowercase
-string formattedKey32 = Chaves.ConvertToAlternatingHex(aesKey32);
-Console.WriteLine("Chave AES de 32 bytes (alternando uppercase e lowercase):");
-Console.WriteLine(formattedKey32);
+    // Exibe a IV em formato hexadecimal
+    string formattedIV = Chaves.ConvertToAlternatingHex(aesAlg.IV);
+    Console.WriteLine("IV de 16 bytes (alternando uppercase e lowercase para exibição):");
+    Console.WriteLine(formattedIV);
+
+    Console.WriteLine("AES Key Length: " + aesAlg.Key.Length); // Deve ser 32 bytes para AES-256
+    Console.WriteLine("IV Length: " + aesAlg.IV.Length);       // Deve ser 16 bytes}
+}
+
+//Chave AES de 32 bytes (alternando uppercase e lowercase para exibição):
+//6647A2f7D4256Fd65Def9A36772d14401E5092f7A7db4C4fFC11850e99da81cd
+//IV de 16 bytes (alternando uppercase e lowercase para exibição):
+//B85938ebDAb41F287B38C83228c44528
+//AES Key Length: 32
+//IV Length: 16
