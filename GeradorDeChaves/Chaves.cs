@@ -22,7 +22,7 @@ namespace GeradorDeChaves
         public static string ConvertToAlternatingHex(byte[] data)
         {
             StringBuilder sb = new StringBuilder(data.Length * 2);
-            string specialChars = "!@#$%^&*()-=+[]{};:<>?";
+            //string specialChars = "!@#$%^&*()-=+[]{};:<>?";
 
             for (int i = 0; i < data.Length; i++)
             {
@@ -32,19 +32,21 @@ namespace GeradorDeChaves
                 // Alterna entre uppercase e lowercase
                 if (i % 2 == 0)
                     sb.Append(hex.ToUpper()); // Par - Uppercase
-                else if (i % 3 == 1)
-                    sb.Append(hex.ToLower()); // Ímpar - Lowercase
                 else
-                    sb.Append(specialChars[i % specialChars.Length]); // Índices com resto 2 - Caractere especial
+                    sb.Append(hex.ToLower());
+                //else if (i % 3 == 1)
+                //    sb.Append(hex.ToLower()); // Ímpar - Lowercase
+                //else
+                //    sb.Append(specialChars[i % specialChars.Length]); // Índices com resto 2 - Caractere especial
             }
 
             return sb.ToString();
         }
 
         //Chave AES de 32 bytes(alternando uppercase e lowercase) :
-        //A9135F$94^CF8a9A)43=1Ff6E3{
+        //8C4b0EceE2669C7c26479E0734953850
         //Chave AES de 32 bytes(alternando uppercase e lowercase) :
-        //38a29C$49^EAe42F)EB=085954{86;70e983?1C @CA8474^00*F069
+        //C9a2DBed2FafCA00B56c052965b77BbaA0f419e715b7A7c553faF7d18Aef5Fb7
     }
 }
  
