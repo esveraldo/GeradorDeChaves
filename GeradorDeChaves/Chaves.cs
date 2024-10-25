@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace GeradorDeChaves
@@ -39,6 +40,11 @@ namespace GeradorDeChaves
 
             return sb.ToString();
         }
+
+        //Chave AES de 32 bytes(alternando uppercase e lowercase) :
+        //A9135F$94^CF8a9A)43=1Ff6E3{
+        //Chave AES de 32 bytes(alternando uppercase e lowercase) :
+        //38a29C$49^EAe42F)EB=085954{86;70e983?1C @CA8474^00*F069
     }
 }
  
